@@ -1,5 +1,6 @@
 # WordPress Docker Environment
-Basic template for working in WordPress with Docker.
+Basic template for working in WordPress with Docker.  
+By default it comes with a PhpMyAdmin instance, so you don't have to install any SQL client.
 
 ## Setup
 1. Copy `.env.example` to `.env`. Modify as needed.
