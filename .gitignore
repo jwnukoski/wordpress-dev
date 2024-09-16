@@ -1,3 +1,7 @@
-wordpress
+wordpress/data
 sql-data
 .env
+.vscode
+php.ini
+xdebug.ini
+error_reporting.ini
