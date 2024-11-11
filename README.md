@@ -31,3 +31,29 @@ After following the above steps, step debugger should work 'out-of-box'. Click t
 
 ### XDebug Logs
 The default location for these is found in the /tmp directory of the WordPress container. You can define it otherwise in the php.ini file. Mapping it to a volume would be a good idea if you frequently check this log. Check here if you are having issues with XDebug working.
+
+## Subfolder
+Setting this up in a subfolder on a server may take a few steps...
+  
+A parent NGINX config in a Docker environment might look like this:  
+```
+location = /paca {
+    return 301 /paca/;
+}
+location /paca {
+    proxy_pass http://172.17.0.1:[Wordpress port];
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}
+```  
+  
+To install Wordpress in a subdirectory at launch, in docker-compose add:
+`working_dir: /var/www/html/subfolder`  
+
+You may need to add the below settings in wp-config.php as well:  
+```php
+define('WP_HOME', 'https://domain.com/subfolder');
+define('WP_SITEURL', 'https://domain.com/subfolder');
+```
