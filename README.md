@@ -37,10 +37,10 @@ Setting this up in a subfolder on a server may take a few steps...
   
 A parent NGINX config in a Docker environment might look like this:  
 ```
-location = /paca {
-    return 301 /paca/;
+location = /subfolder {
+    return 301 /subfolder/;
 }
-location /paca {
+location /subfolder {
     proxy_pass http://172.17.0.1:[Wordpress port];
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
@@ -57,3 +57,5 @@ You may need to add the below settings in wp-config.php as well:
 define('WP_HOME', 'https://domain.com/subfolder');
 define('WP_SITEURL', 'https://domain.com/subfolder');
 ```
+
+Make sure these settings are also set under Wordpress options.
